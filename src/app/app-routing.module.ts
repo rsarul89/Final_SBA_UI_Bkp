@@ -1,10 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { PageNotFoundComponent } from './page-not-found.component';
 
 const routes: Routes = [
   {
     path: 'skills',
     loadChildren: './skill/skill.module#SkillModule'
+  },
+  {
+    path: 'associates',
+    loadChildren: './associate/associate.module#AssociateModule'
+  },
+  {
+    path:'**',
+    component : PageNotFoundComponent
   }
 ];
 
