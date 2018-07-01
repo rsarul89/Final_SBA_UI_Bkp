@@ -1,0 +1,277 @@
+<div class="container custom-container">
+    <div class="jumbotron jumbotron-fluid banner" *appShowAuthed="false">
+        <h1 class="text-center">Skill Tracker</h1>
+        <p class="text-center">A place to track associate skills.</p>
+    </div>
+    <div class="container-fluid custom" *appShowAuthed="true">
+        <div class="row">
+            <div class="col col-sm-12">
+                <h3 class="header">Skill Tracker: Search Associate</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-12 col-md-9">
+                <div class="row">
+                    <div class="col-12 col-md-12">
+                        <div class="chart-box">
+                            <figure>
+                                <div class="graphic">
+                                    <div class="chart-row">
+                                        <div class="chart">
+                                            <span class="block" title="HTML 5">
+                                                <span class="value">18.75%</span>
+                                            </span>
+                                            <span class="block" title="CSS3">
+                                                <span class="value">12.5%</span>
+                                            </span>
+                                            <span class="block" title="Java">
+                                                <span class="value">12.5%</span>
+                                            </span>
+                                            <span class="block" title="Spring">
+                                                <span class="value">6.25%</span>
+                                            </span>
+                                            <span class="block" title="Restful">
+                                                <span class="value">12.5%</span>
+                                            </span>
+                                            <span class="block" title="Angular 1">
+                                                <span class="value">12.5%</span>
+                                            </span>
+                                            <span class="block" title="Angular 2">
+                                                <span class="value">12.5%</span>
+                                            </span>
+                                            <span class="block" title="React">
+                                                <span class="value">12.5%</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12">
+                        <div class="row">
+                            <div class="coll col-md-3 col-6">
+                                <div class="chart-box percent-box">{{ dashboardData.registeredUsers }} Registered Candidates</div>
+                            </div>
+                            <div class="coll col-md-3 col-6">
+                                <div class="chart-box percent-box">{{ dashboardData.femaleCandidates }}% Female Candidates</div>
+                            </div>
+                            <div class="coll col-md-3 col-6">
+                                <div class="chart-box percent-box">{{ dashboardData.maleCandidates }}% Male Candidates</div>
+                            </div>
+                            <div class="coll col-md-3 col-6">
+                                <div class="chart-box percent-box">{{ dashboardData.candidateFreshers }}% Candidates Freshers</div>
+                            </div>
+                            <div class="coll col-md-4 col-6">
+                                <div class="chart-box percent-box">{{ dashboardData.candidatesRated }} Candidates Rated</div>
+                            </div>
+                            <div class="coll col-md-4 col-6">
+                                <div class="chart-box percent-box">{{ dashboardData.femaleCandidatesRated }}% Female Candidates Rated</div>
+                            </div>
+                            <div class="coll col-md-4 col-6">
+                                <div class="chart-box percent-box">{{ dashboardData.maleCandidatesRated }}% Male Candidates Rated</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="row">
+                    <div class="col-6 col-md-12">
+                        <div class="chart-box percent-box">{{ dashboardData.level3candidates }}% Level-3 Candidates</div>
+                    </div>
+                    <div class="col-6 col-md-12">
+                        <div class="chart-box percent-box">{{ dashboardData.level2candidates }}% Level-2 Candidates</div>
+                    </div>
+                    <div class="col-6 col-md-12">
+                        <div class="chart-box percent-box">{{ dashboardData.level1candidates }}% Level-1 Candidates</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-12" *ngIf="hasData()">
+                <table class="table table-striped table-responsive table-hover associates-table">
+                    <thead>
+                        <tr>
+                            <th>Pic</th>
+                            <th>Status</th>
+                            <th>
+                                <input class="form-control headerFilter" [ngModel]="nameSearch" (ngModelChange)="Filter($event,'Name')" name="nameSearch"
+                                    type="text" placeholder="Search By Name">
+                            </th>
+                            <th>
+                                <input class="form-control headerFilter" [ngModel]="idSearch" (ngModelChange)="Filter($event,'Associate_Id')" name="idSearch"
+                                    type="text" placeholder="Search By Associate Id">
+                            </th>
+                            <th>
+                                <input class="form-control headerFilter" [ngModel]="emailSearch" (ngModelChange)="Filter($event,'Email')" name="emailSearch"
+                                    type="text" placeholder="Search By Email Id">
+                            </th>
+                            <th>
+                                <input class="form-control headerFilter" [ngModel]="mobileSearch" (ngModelChange)="Filter($event,'Mobile')" name="mobileSearch"
+                                    type="text" placeholder="Search By Mobile No">
+                            </th>
+                            <th>
+                                <input class="form-control headerFilter" [ngModel]="strengthSearch" (ngModelChange)="Filter($event,'Strength')" name="strengthSearch"
+                                    type="text" placeholder="Search By Strong Skills">
+                            </th>
+                            <th>
+                                <button type="button" class="btn btn-sm btn-primary pull-right"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;Add New Associate</button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let associate of associates | searchfilter: filterName : searchText; let i = index;trackBy:trackByIndex;">
+                            <td>
+                                <img class="userImg">
+                            </td>
+                            <td>
+                                <span class="indicator" [ngClass]="{'green':associate.Status_Green === 'Y', 'blue':associate.Status_Blue === 'Y','red':associate.Status_Red === 'Y'}"></span>
+                            </td>
+                            <td>{{associate.Name}}</td>
+                            <td>{{associate.Associate_Id}}</td>
+                            <td>{{associate.Email}}</td>
+                            <td>{{associate.Mobile}}</td>
+                            <td>{{associate.Strength}}</td>
+                            <td>
+                                <div class="actionBtns">
+                                    <button type="button" class="btn btn-sm btn-primary" (click)="Edit(associate)"><i class="fa fa-pencil-square" aria-hidden="true"></i>&nbsp;Edit</button>
+                                    <button type="button" class="btn btn-sm btn-primary" (click)="Delete(associate, i)"><i class="fa fa-trash" aria-hidden="true"></i>&nbsp;Delete</button>
+                                    <button type="button" class="btn btn-sm btn-primary" (click)="View(associate)"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp;View</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col col-12 text-center" *ngIf="!hasData()">
+                <p>No associates found</p>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col col-12">
+                <div class="row">
+                    <div class="col col-6 col-sm-4 col-md-3" *ngFor="let skill of skills;let index = index;trackBy:trackByIndex;">
+                        <div class="skillcontainer">
+                            <label class="labelCustom" for="{{skill.Skill_Name}}">{{skill.Skill_Name}}: </label>
+                            <input name="{{skill.Skill_Name}}" [min]=0 [max]=20 type="range"
+                                [(ngModel)]="skills[index]">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+<modal id="associate-view-modal">
+    <div class="modal fade show" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">View Associate</h5>
+                    <button type="button" class="close" (click)="closeModal('associate-view-modal');">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col col-6">
+                            <p class="viewLabel">Associate Name:</p>
+                        </div>
+                        <div class="col col-6">
+                            <p>
+                                <i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;{{ viewAssociate.Name }}</p>
+                        </div>
+                        <div class="col col-6">
+                            <p class="viewLabel">Associate Email:</p>
+                        </div>
+                        <div class="col col-6">
+                            <p>
+                                <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;{{ viewAssociate.Email }}</p>
+                        </div>
+                        <div class="col col-6">
+                            <p class="viewLabel">Associate Gender:</p>
+                        </div>
+                        <div class="col col-6">
+                            <p>
+                                <i class="fa" [ngClass]="{'fa-mars':viewAssociate.Gender === 'Male', 'fa-venus':viewAssociate.Gender === 'Female'}" aria-hidden="true"></i>&nbsp;{{ viewAssociate.Gender }}</p>
+                        </div>
+                        <div class="col col-6">
+                            <p class="viewLabel">Associate Mobile:</p>
+                        </div>
+                        <div class="col col-6">
+                            <p>
+                                <i class="fa fa-mobile" aria-hidden="true"></i>&nbsp;{{ viewAssociate.Mobile }}</p>
+                        </div>
+                        <div class="col col-6">
+                            <p class="viewLabel">Associate Picture:</p>
+                        </div>
+                        <div class="col col-6">
+                            <p>
+                                <img class="userImg" *ngIf="viewAssociate.Pic" [src]="domSanitizer.bypassSecurityTrustUrl(viewAssociate.Pic)" />
+                            </p>
+                        </div>
+                        <div class="col col-6">
+                            <p class="viewLabel">Associate Status:</p>
+                        </div>
+                        <div class="col col-6">
+                            <p *ngIf="viewAssociate.Status_Green === 'Y'">Available for project allocation.</p>
+                            <p *ngIf="viewAssociate.Status_Blue === 'Y'">Allocating to a project is in process.</p>
+                            <p *ngIf="viewAssociate.Status_Red === 'Y'">Already allocated to a project.</p>
+                        </div>
+                        <div class="col col-6">
+                            <p class="viewLabel">Associate Level:</p>
+                        </div>
+                        <div class="col col-6">
+                            <p *ngIf="viewAssociate.Level_1 === 'Y'">Fresher and less than one year experience.</p>
+                            <p *ngIf="viewAssociate.Level_2 === 'Y'">One to five years of experience.</p>
+                            <p *ngIf="viewAssociate.Level_3 === 'Y'">Six to eight years of experience.</p>
+                        </div>
+                        <div class="col col-6">
+                            <p class="viewLabel">Associate Remarks:</p>
+                        </div>
+                        <div class="col col-6">
+                            <p>{{ viewAssociate.Remark }}</p>
+                        </div>
+                        <div class="col col-6">
+                            <p class="viewLabel">Associate Strengths:</p>
+                        </div>
+                        <div class="col col-6">
+                            <p>{{ viewAssociate.Strength }}</p>
+                        </div>
+                        <div class="col col-6">
+                            <p class="viewLabel">Associate Weakness:</p>
+                        </div>
+                        <div class="col col-6">
+                            <p>{{ viewAssociate.Weakness }}</p>
+                        </div>
+                        <div class="col col-6">
+                            <p class="viewLabel">Associate Skills:</p>
+                        </div>
+                        <div class="col col-6">
+                            <div *ngIf="viewAssociate.Associate_Skills != null && viewAssociate.Associate_Skills.length > 0">
+                                <div class="row">
+                                    <div class="col col-6" *ngFor="let associateSkill of viewAssociate.Associate_Skills;let index = index;trackBy:trackByIndex;">
+                                        <p>
+                                            {{ associateSkill.Skill.Skill_Name }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p *ngIf="viewAssociate.Associate_Skills == null && viewAssociate.Associate_Skills.length <= 0">
+                                Associate have no skills.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="col col-6 text-right">
+                        <button type="button" class="btn btn-md btn-secondary" (click)="closeModal('associate-view-modal');">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-background"></div>
+</modal>

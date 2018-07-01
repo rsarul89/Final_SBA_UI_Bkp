@@ -1,0 +1,27 @@
+h3.header{
+    font-weight: bold;
+  }
+    .actionBtns{
+	  display: inline-flex;
+  }
+.actionBtns button{
+	margin-left: 5px;
+}
+.addSkillHeader{
+  font-size: 20px;
+  font-weight: bold;
+}
+.m-right-15px{
+  margin-right: 15px;
+}
+.m-bottom-15px{
+  margin-bottom: 15px;
+}
+p.skillName{
+  font-weight: 700;
+}
+@media (min-width: 576px) { 
+  input.skillName{
+    margin-right: 17px !important;
+  }
+ }

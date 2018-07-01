@@ -1,0 +1,93 @@
+<div class="container custom-container">
+  <div class="row">
+    <div class="col col-12">
+      <h3 class="header m-bottom-15px">Skill Tracker: Add Skill Page</h3>
+      <div class="row">
+        <div class="col col-12">
+          <form class="form-inline m-bottom-15px" (ngSubmit)="onFormSubmit()" #skillForm="ngForm" novalidate>
+            <div class="form-group">
+              <label for="skillName" class="addSkillHeader m-right-15px">Add Skill:</label>
+              <input type="text" name="skillName" [(ngModel)]="skill.Skill_Name" #skillName="ngModel" class="form-control skillName m-right-15px"
+                id="skillName" required>
+            </div>
+            <button type="submit" [disabled]="!skillForm.valid" class="btn btn-primary m-right-15px">Add Skill</button>
+            <button type="button" class="btn btn-secondary m-right-15px" (click)="resetSkillForm(skillForm)">Reset</button>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-12 col-md-4" *ngFor="let skill of skills;let index = index;trackBy:trackByIndex;">
+          <div class="row">
+            <div class="col col-6">
+              <p class="skillName">{{skill.Skill_Name}}</p>
+            </div>
+            <div class="col col-6">
+              <div class="actionBtns">
+                <button type="button" class="btn btn-sm btn-primary" (click)="Edit(skill)"> Edit</button>
+                <button type="button" class="btn btn-sm btn-danger" (click)="Delete(skill, index)"> Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<modal id="skill-edit-modal">
+  <div class="modal fade show" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Skill</h5>
+          <button type="button" class="close" (click)="closeModal('skill-edit-modal');">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #skillEditForm="ngForm" novalidate>
+            <div class="form-group">
+              <label for="skillEditName">Skill Name</label>
+              <input type="text" class="form-control" [(ngModel)]="editSkill.Skill_Name" #skillEditName="ngModel" id="skillEditName" name="skillEditName"
+                placeholder="Modify skill name" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <div class="col col-sm-6 text-left">
+            <button type="submit" [disabled]="!skillEditForm.valid" (click)="onFormEditSubmit()" class="btn btn-md btn-primary">Update Skill</button>
+          </div>
+          <div class="col col-sm-6 text-right">
+            <button type="button" class="btn btn-md btn-primary" (click)="closeModal('skill-edit-modal');">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-background"></div>
+</modal>
+<modal id="skill-delete-confirmation-modal">
+  <div class="modal fade show" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmation</h5>
+          <button type="button" class="close" (click)="closeModal('skill-delete-confirmation-modal');">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure want to delete this skill?.</p>
+        </div>
+        <div class="modal-footer">
+          <div class="col col-sm-6 text-left">
+            <button type="submit" (click)="OnDeleteConfirm()" class="btn btn-md btn-primary">Ok</button>
+          </div>
+          <div class="col col-sm-6 text-right">
+            <button type="button" class="btn btn-md btn-primary" (click)="closeModal('skill-delete-confirmation-modal');">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-background"></div>
+</modal>

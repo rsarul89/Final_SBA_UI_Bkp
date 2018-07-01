@@ -1,0 +1,38 @@
+<div class="auth-page">
+  <div class="container page">
+    <div class="row">
+
+      <div class="col-md-6 offset-md-3 col-xs-12">
+        <h1 class="text-xs-center">{{ title }}</h1>
+        <p class="text-xs-center">
+          <a [routerLink]="['/login']" *ngIf="authType == 'register'">Have an account?</a>
+          <a [routerLink]="['/register']" *ngIf="authType == 'login'">Need an account?</a>
+        </p>
+        <app-list-errors [errors]="errors"></app-list-errors>
+        <form [formGroup]="authForm" (ngSubmit)="submitForm()">
+          <fieldset [disabled]="isSubmitting">
+            <fieldset>
+              <div class="form-group">
+                <label for="user_name">User name:</label>
+                <input type="text" formControlName="user_name" placeholder="Username" class="form-control form-control-lg">
+              </div>
+            </fieldset>
+            <fieldset *ngIf="authType == 'register'">
+              <div class="form-group">
+                <label for="user_email">Email address:</label>
+                <input type="text" formControlName="user_email" placeholder="Email" class="form-control form-control-lg">
+              </div>
+            </fieldset>
+            <fieldset>
+              <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" formControlName="password" placeholder="Password" class="form-control form-control-lg">
+              </div>
+            </fieldset>
+            <button type="submit" [disabled]="!authForm.valid" class="btn btn-lg btn-primary pull-xs-right"> {{ title }}</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
