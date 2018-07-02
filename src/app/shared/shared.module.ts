@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 
 import { ListErrorsComponent } from './list-errors.component';
 import { ShowAuthedDirective } from './show-authed.directive';
@@ -16,6 +17,7 @@ import { ModalComponent, ModalService } from './modal-popup';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgHttpLoaderModule,
     RouterModule
   ],
   declarations: [
@@ -30,6 +32,7 @@ import { ModalComponent, ModalService } from './modal-popup';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgHttpLoaderModule,
     ListErrorsComponent,
     RouterModule,
     ShowAuthedDirective,
@@ -37,6 +40,8 @@ import { ModalComponent, ModalService } from './modal-popup';
     InlineEditComponent,
     ModalComponent
   ],
-  providers: [ ModalService ]
+  providers: [
+    ModalService
+  ]
 })
 export class SharedModule { }

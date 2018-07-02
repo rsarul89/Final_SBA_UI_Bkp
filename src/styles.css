@@ -29,7 +29,46 @@ body{
     right: 0px;
   }
 
-  input[type=range] {
+  input[type=range]{
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 10px; /* Specified height */
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+  }
+  input[type=range]:focus {
+    outline: none;
+  }
+  /* Mouse-over effects */
+  input[type=range]:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */ 
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 20px; /* Set a specific slider handle width */
+  height: 20px; /* Slider handle height */
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+input[type=range]::-moz-range-thumb {
+  width: 20px; /* Set a specific slider handle width */
+  height: 20px; /* Slider handle height */
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+  /* input[type=range] {
     -webkit-appearance: none;
     margin: 10px 0;
     width: 100%;
@@ -116,7 +155,7 @@ body{
   }
   input[type=range]:focus::-ms-fill-upper {
     background: #ac51b5;
-  }
+  } */
   
   modal{
     display: none;

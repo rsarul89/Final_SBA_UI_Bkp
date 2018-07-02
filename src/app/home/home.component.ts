@@ -136,7 +136,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     let usr2: Associate = {
       Associate_Id: 123456,
       Email: 'test2@test.com',
-      Name: 'Pavithra',
+      Name: 'Aravind',
       Mobile: '7777777777',
       Strength: 'HTML5, CSS3, jQuery',
       Weakness: '.NET',
@@ -180,6 +180,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
         });
         this.errors = err;
       });
+  }
+  addAssociate() {
+    this.router.navigateByUrl('/associates/add');
   }
   View(associate: Associate) {
     this.viewAssociate = associate;
