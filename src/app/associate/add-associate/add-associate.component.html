@@ -176,11 +176,47 @@
                   <div class="col col-12 col-md-8">
                     <div class="slider-inline">
                       <span class="slider-start">0</span>
-                      <input class="rating" name="rating-{{skill.Skill_Name}}" (change)="addAssociateSkill($event, skill, index)" id="rating-{{index}}"
+                      <input class="rating" name="rating-{{skill.Skill_Name}}" [(ngModel)]="addAssociate.Associate_Skills[index].Rating" (ngModelChange)="valueChanged($event, index)" id="rating-{{index}}"
                         #skillRef{{index}} [min]=0 [max]=20 type="range" value="0">
                       <span class="slider-end">20</span>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row m-bottom-15px">
+        <div class="col col-12">
+          <div class="row">
+            <div class="col col-6 col-sm-6 col-md-4">
+              <div class="row">
+                <div class="col col-12 col-md-4">
+                  <label class="labelCustom skillLabel" for="Other">Other: </label>
+                </div>
+                <div class="col col-12 col-md-8">
+                  <input type="text" name="Other" id="Other" class="form-control" #other="ngModel" [(ngModel)]="addAssociate.Other">
+                </div>
+              </div>
+            </div>
+            <div class="col col-6 col-sm-6 col-md-4">
+              <div class="row">
+                <div class="col col-12 col-md-4">
+                  <label class="labelCustom skillLabel" for="Strength">Strength: </label>
+                </div>
+                <div class="col col-12 col-md-8">
+                  <input type="text" name="Strength" id="Strength" class="form-control" #strength="ngModel" [(ngModel)]="addAssociate.Strength">
+                </div>
+              </div>
+            </div>
+            <div class="col col-6 col-sm-6 col-md-4">
+              <div class="row">
+                <div class="col col-12 col-md-4">
+                  <label class="labelCustom skillLabel" for="Weakness">Weakness: </label>
+                </div>
+                <div class="col col-12 col-md-8">
+                  <input type="text" name="Weakness" id="Weakness" class="form-control" #weakness="ngModel" [(ngModel)]="addAssociate.Weakness">
                 </div>
               </div>
             </div>

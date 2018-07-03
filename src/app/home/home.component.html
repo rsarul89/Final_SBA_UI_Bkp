@@ -117,14 +117,17 @@
                                     type="text" placeholder="Search By Strong Skills">
                             </th>
                             <th>
-                                <button type="button" class="btn btn-sm btn-primary pull-right" (click)="addAssociate();"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;Add New Associate</button>
+                                <button type="button" class="btn btn-sm btn-primary pull-right" (click)="addAssociate();">
+                                    <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;Add New Associate</button>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let associate of associates | searchfilter: filterName : searchText; let i = index;trackBy:trackByIndex;">
                             <td>
-                                <img class="userImg">
+                                <img *ngIf="associate.Pic !== null" class="userImg" [ngClass]="{'male':associate.Gender === 'male','female':associate.Gender === 'female'}"
+                                    [src]="associate.Pic">
+                                <img *ngIf="associate.Pic === null" class="userImg" [ngClass]="{'male':associate.Gender === 'male','female':associate.Gender === 'female'}">
                             </td>
                             <td>
                                 <span class="indicator" [ngClass]="{'green':associate.Status_Green === 'Y', 'blue':associate.Status_Blue === 'Y','red':associate.Status_Red === 'Y'}"></span>
@@ -136,9 +139,12 @@
                             <td>{{associate.Strength}}</td>
                             <td>
                                 <div class="actionBtns">
-                                    <button type="button" class="btn btn-sm btn-primary" (click)="Edit(associate)"><i class="fa fa-pencil-square" aria-hidden="true"></i>&nbsp;Edit</button>
-                                    <button type="button" class="btn btn-sm btn-primary" (click)="Delete(associate, i)"><i class="fa fa-trash" aria-hidden="true"></i>&nbsp;Delete</button>
-                                    <button type="button" class="btn btn-sm btn-primary" (click)="View(associate)"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp;View</button>
+                                    <button type="button" class="btn btn-sm btn-primary" (click)="Edit(associate)">
+                                        <i class="fa fa-pencil-square" aria-hidden="true"></i>&nbsp;Edit</button>
+                                    <button type="button" class="btn btn-sm btn-primary" (click)="Delete(associate, i)">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;Delete</button>
+                                    <button type="button" class="btn btn-sm btn-primary" (click)="View(associate)">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;View</button>
                                 </div>
                             </td>
                         </tr>
@@ -182,7 +188,7 @@
                         </div>
                         <div class="col col-6">
                             <p>
-                                <i class="fa" [ngClass]="{'fa-mars':viewAssociate.Gender === 'Male', 'fa-venus':viewAssociate.Gender === 'Female'}" aria-hidden="true"></i>&nbsp;{{ viewAssociate.Gender }}</p>
+                                <i class="fa" [ngClass]="{'fa-mars':viewAssociate.Gender === 'male','fa-venus':viewAssociate.Gender === 'female'}" aria-hidden="true"></i>&nbsp;{{ viewAssociate.Gender }}</p>
                         </div>
                         <div class="col col-6">
                             <p class="viewLabel">Associate Mobile:</p>
@@ -236,10 +242,12 @@
                         <div class="col col-6">
                             <p class="viewLabel">Associate Skills:</p>
                         </div>
-                        <div class="col col-6">
+                    </div>
+                    <div class="row">
+                        <div class="col col-12">
                             <div *ngIf="viewAssociate.Associate_Skills != null && viewAssociate.Associate_Skills.length > 0">
                                 <div class="row">
-                                    <div class="col col-6" *ngFor="let associateSkill of viewAssociate.Associate_Skills;let index = index;trackBy:trackByIndex;">
+                                    <div class="col col-6 col-md-3" *ngFor="let associateSkill of viewAssociate.Associate_Skills;let index = index;trackBy:trackByIndex;">
                                         <p>
                                             {{ associateSkill.Skill.Skill_Name }}
                                         </p>

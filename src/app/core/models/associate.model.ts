@@ -16,6 +16,7 @@ export class Associate {
   Remark?: String;
   Strength?: String;
   Weakness?: String;
+  Other?: String;
   Associate_Skills?: Array<Associate_Skills>;
   constructor() {
     this.Associate_Skills = new Array<Associate_Skills>();

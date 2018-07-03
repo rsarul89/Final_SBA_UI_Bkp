@@ -192,8 +192,15 @@ figure {
 	
   img.userImg {
 	width: 30px;
-	content:url(../../assets/images/img_avatar.png);
-  }
+	}
+	
+	img.male{
+		content:url(../../assets/images/img_avatar.png);
+	}
+
+	img.female{
+		content:url(../../assets/images/img_avatar2.png);
+	}
 
 .skillcontainer{
 	display: inline-flex;
@@ -202,4 +209,8 @@ figure {
 }
 .labelCustom{
 	padding-right: 15px;
+}
+.modal-body{
+	padding-left: 35px;
+    padding-right: 35px;
 }

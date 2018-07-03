@@ -7,9 +7,9 @@ const routes: Routes = [
   {
     path: '',
     component: SkillComponent,
-    resolve: {
-      isAuthenticated: SkillAuthResolver
-    }
+    // resolve: {
+    //   isAuthenticated: SkillAuthResolver
+    // }
   }
 ];
 

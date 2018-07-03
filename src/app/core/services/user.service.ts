@@ -22,6 +22,8 @@ export class UserService {
   private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
   public isAuthenticated = this.isAuthenticatedSubject.asObservable();
 
+  private redirectUrl: string = '/';
+
   constructor(
     private router: Router,
     private apiService: ApiService,
@@ -47,7 +49,7 @@ export class UserService {
         if (Object.keys(user).length !== 0) {
           this.setAuth(user);
         }
-        else{
+        else {
           this.purgeAuth();
         }
       }
@@ -101,6 +103,12 @@ export class UserService {
         this.currentUserSubject.next(data.user);
         return data.user;
       }));
+  }
+  getRedirectUrl(): string {
+    return this.redirectUrl;
+  }
+  setRedirectUrl(url: string): void {
+    this.redirectUrl = url;
   }
 
 }
