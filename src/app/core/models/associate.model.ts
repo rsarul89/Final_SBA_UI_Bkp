@@ -7,12 +7,12 @@ export class Associate {
   Gender?: String;
   Mobile?: String;
   Pic?: String;
-  Status_Green?: String;
-  Status_Blue?: String;
-  Status_Red?: String;
-  Level_1?: String;
-  Level_2?: String;
-  Level_3?: String;
+  Status_Green?: Boolean;
+  Status_Blue?: Boolean;
+  Status_Red?: Boolean;
+  Level_1?: Boolean;
+  Level_2?: Boolean;
+  Level_3?: Boolean;
   Remark?: String;
   Strength?: String;
   Weakness?: String;

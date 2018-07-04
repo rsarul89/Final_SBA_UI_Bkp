@@ -25,12 +25,6 @@ export class AddAssociateComponent implements OnInit {
   addAssociate: Associate = new Associate();
   skills: Array<Skill> = new Array<Skill>();
   imageSrc: string = '';
-  statusGreenChecked: boolean = false;
-  statusBlueChecked: boolean = false;
-  statusRedChecked: boolean = false;
-  level1Checked: boolean = false;
-  level2Checked: boolean = false;
-  level3Checked: boolean = false;
   imgReset: boolean = true;
 
   ngOnInit() {
@@ -89,16 +83,6 @@ export class AddAssociateComponent implements OnInit {
     this.imageSrc = reader.result;
     this.addAssociate.Pic = reader.result;
   }
-  statusCheckChange(statusName) {
-    this.addAssociate.Status_Green = (this.statusGreenChecked == true && statusName == 'green') ? 'Y' : 'N';
-    this.addAssociate.Status_Blue = (this.statusBlueChecked == true && statusName == 'blue') ? 'Y' : 'N';
-    this.addAssociate.Status_Red = (this.statusRedChecked == true && statusName == 'red') ? 'Y' : 'N';
-  }
-  levelCheckChange(levelName) {
-    this.addAssociate.Level_1 = (this.level1Checked == true && levelName == 'L1') ? 'Y' : 'N';
-    this.addAssociate.Level_2 = (this.level2Checked == true && levelName == 'L2') ? 'Y' : 'N';
-    this.addAssociate.Level_3 = (this.level3Checked == true && levelName == 'L3') ? 'Y' : 'N';
-  }
   valueChanged(event: any, index: any) {
     let ranger = $('#rating-' + index);
     ranger.prev('span.slider-start').html(event);
@@ -118,18 +102,12 @@ export class AddAssociateComponent implements OnInit {
     this.addAssociate.Name = null;
     this.addAssociate.Strength = null;
     this.addAssociate.Weakness = null;
-    this.addAssociate.Status_Green = 'N';
-    this.addAssociate.Status_Blue = 'N';
-    this.addAssociate.Status_Red = 'N';
-    this.addAssociate.Level_1 = 'N';
-    this.addAssociate.Level_2 = 'N';
-    this.addAssociate.Level_3 = 'N';
-    this.statusGreenChecked = false;
-    this.statusBlueChecked = false;
-    this.statusRedChecked = false;
-    this.level1Checked = false;
-    this.level2Checked = false;
-    this.level3Checked = false;
+    this.addAssociate.Status_Green = false;
+    this.addAssociate.Status_Blue = false;
+    this.addAssociate.Status_Red = false;
+    this.addAssociate.Level_1 = false;
+    this.addAssociate.Level_2 = false;
+    this.addAssociate.Level_3 = false;
     this.imageSrc = '';
     this.imgReset = true;
     $('.rating').val(0).prev('.slider-start').html('0');
@@ -181,11 +159,5 @@ export class AddAssociateComponent implements OnInit {
       };
     };
     request.send();
-  }
-  statusAndLevelCheck(): boolean {
-    if ((this.statusGreenChecked == true || this.statusBlueChecked == true || this.statusRedChecked == true) && (this.level1Checked == true || this.level2Checked == true || this.level3Checked == true)) {
-      return true;
-    }
-    return false;
   }
 }

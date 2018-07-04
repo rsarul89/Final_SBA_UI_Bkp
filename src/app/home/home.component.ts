@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   Edit(associate: Associate) {
-    console.log(associate);
+    this.router.navigate(['/associates/edit',associate.Associate_Id]);
   }
   Delete(associate: Associate, idx: number) {
     this.associateService.DeleteAssociate(associate)

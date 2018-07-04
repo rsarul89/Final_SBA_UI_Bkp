@@ -91,8 +91,8 @@
                   </div>
                   <div class="col col-12 col-md-8">
                     <p>
-                      <input type="radio" value="male" name="gender" required #gender="ngModel" [(ngModel)]="addAssociate.Gender"> Male
-                      <input type="radio" value="female" name="gender" required #gender="ngModel" [(ngModel)]="addAssociate.Gender"> Female
+                      <input type="radio" value="Male" name="gender" required #gender="ngModel" [(ngModel)]="addAssociate.Gender"> Male
+                      <input type="radio" value="Female" name="gender" required #gender="ngModel" [(ngModel)]="addAssociate.Gender"> Female
                     </p>
                     <div *ngIf="gender.errors && (gender.dirty || gender.touched)">
                       <small *ngIf="(gender.errors.required && !associateForm.submitted)">
@@ -116,38 +116,48 @@
           <div class="col col-6 col-md-1 m-bottom-15px">
             <div class="row">
               <div class="col col-12">
-                <input type="checkbox" class="form-control status" [(ngModel)]="statusGreenChecked" (ngModelChange)="statusCheckChange('green')"
-                  name="statusGreen" id="statusGreen">
+                <input type="checkbox" class="form-control status" #status="ngModel" [(ngModel)]="addAssociate.Status_Green"
+                  name="statusGreen"  id="statusGreen">
                 <label class="statuslabel indicator green" for="statusGreen">Status Green</label>
               </div>
               <div class="col col-12">
-                <input type="checkbox" class="form-control status" [(ngModel)]="statusBlueChecked" (ngModelChange)="statusCheckChange('blue')"
-                  name="statusBlue" id="statusBlue">
+                <input type="checkbox" class="form-control status"  #status="ngModel" [(ngModel)]="addAssociate.Status_Blue"
+                  name="statusBlue"  id="statusBlue">
                 <label class="statuslabel indicator blue" for="statusBlue">Status Blue</label>
               </div>
               <div class="col col-12">
-                <input type="checkbox" class="form-control status" [(ngModel)]="statusRedChecked" (ngModelChange)="statusCheckChange('red')"
-                  name="statusRed" id="statusRed">
+                <input type="checkbox" class="form-control status"  #status="ngModel" [(ngModel)]="addAssociate.Status_Red" 
+                  name="statusRed"  id="statusRed">
                 <label class="statuslabel indicator red" for="statusRed">Status Red</label>
               </div>
+              <div class="col col-12" *ngIf="status.errors && (status.dirty || status.touched)">
+                  <small *ngIf="(status.errors.required && !associateForm.submitted)">
+                    Associate status is required.
+                  </small>
+                </div>
             </div>
           </div>
           <div class="col col-6 col-md-1 m-bottom-15px">
             <div class="row">
               <div class="col col-12">
-                <input type="checkbox" class="form-control level" [(ngModel)]="level1Checked" (ngModelChange)="levelCheckChange('L1')" name="level1"
+                <input type="checkbox"  class="form-control level" #level="ngModel" [(ngModel)]="addAssociate.Level_1"  name="level1"
                   id="level1">
                 <label class="levellabel indicator grey" for="level1">L1</label>
               </div>
               <div class="col col-12">
-                <input type="checkbox" class="form-control level" [(ngModel)]="level2Checked" (ngModelChange)="levelCheckChange('L2')" name="level2"
+                <input type="checkbox"  class="form-control level"  #level="ngModel"  [(ngModel)]="addAssociate.Level_2" name="level2"
                   id="level2">
                 <label class="levellabel indicator grey" for="level2">L2</label>
               </div>
               <div class="col col-12">
-                <input type="checkbox" class="form-control level" [(ngModel)]="level3Checked" (ngModelChange)="levelCheckChange('L3')" name="level2"
+                <input type="checkbox"  class="form-control level" #level="ngModel" [(ngModel)]="addAssociate.Level_3" name="level3"
                   id="level3">
                 <label class="levellabel indicator grey" for="level3">L3</label>
+              </div>
+              <div class="col col-12" *ngIf="level.errors && (level.dirty || level.touched)">
+                <small *ngIf="(level.errors.required && !associateForm.submitted)">
+                  Associate level is required.
+                </small>
               </div>
             </div>
           </div>
@@ -176,8 +186,8 @@
                   <div class="col col-12 col-md-8">
                     <div class="slider-inline">
                       <span class="slider-start">0</span>
-                      <input class="rating" name="rating-{{skill.Skill_Name}}" [(ngModel)]="addAssociate.Associate_Skills[index].Rating" (ngModelChange)="valueChanged($event, index)" id="rating-{{index}}"
-                        #skillRef{{index}} [min]=0 [max]=20 type="range" value="0">
+                      <input class="rating" name="rating-{{skill.Skill_Name}}" [(ngModel)]="addAssociate.Associate_Skills[index].Rating" (ngModelChange)="valueChanged($event, index)"
+                        id="rating-{{index}}" #skillRef{{index}} [min]=0 [max]=20 type="range" value="0">
                       <span class="slider-end">20</span>
                     </div>
                   </div>
@@ -228,7 +238,7 @@
           <div class="actionBtns pull-right">
             <button type="button" class="btn btn-md btn-primary" (click)="Reset()"> Reset</button>
             <button type="button" class="btn btn-md btn-primary" (click)="Cancel()"> Cancel</button>
-            <button type="button" class="btn btn-md btn-primary" (click)="Save()" [disabled]="!associateForm.valid || !statusAndLevelCheck()">
+            <button type="button" class="btn btn-md btn-primary" (click)="Save()" [disabled]="!associateForm.valid">
               Save</button>
           </div>
         </div>

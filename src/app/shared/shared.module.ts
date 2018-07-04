@@ -7,7 +7,7 @@ import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 
 import { ListErrorsComponent } from './list-errors.component';
 import { ShowAuthedDirective } from './show-authed.directive';
-import { SearchFilterPipe } from './pipes';
+import { SearchFilterPipe, FilterByObject } from './pipes';
 import { InlineEditComponent } from './inline-edit';
 import { ModalComponent, ModalService } from './modal-popup';
 
@@ -24,6 +24,7 @@ import { ModalComponent, ModalService } from './modal-popup';
     ListErrorsComponent,
     ShowAuthedDirective,
     SearchFilterPipe,
+    FilterByObject,
     InlineEditComponent,
     ModalComponent
   ],
@@ -37,6 +38,7 @@ import { ModalComponent, ModalService } from './modal-popup';
     RouterModule,
     ShowAuthedDirective,
     SearchFilterPipe,
+    FilterByObject,
     InlineEditComponent,
     ModalComponent
   ],

@@ -125,12 +125,20 @@
                     <tbody>
                         <tr *ngFor="let associate of associates | searchfilter: filterName : searchText; let i = index;trackBy:trackByIndex;">
                             <td>
-                                <img *ngIf="associate.Pic !== null" class="userImg" [ngClass]="{'male':associate.Gender === 'male','female':associate.Gender === 'female'}"
+                                <img *ngIf="associate.Pic !== null" class="userImg" [attr.title]="associate.Gender" [ngClass]="{'male':associate.Gender === 'Male','female':associate.Gender === 'Female'}"
                                     [src]="associate.Pic">
-                                <img *ngIf="associate.Pic === null" class="userImg" [ngClass]="{'male':associate.Gender === 'male','female':associate.Gender === 'female'}">
+                                <img *ngIf="associate.Pic === null" class="userImg" [attr.title]="associate.Gender" [ngClass]="{'male':associate.Gender === 'Male','female':associate.Gender === 'Female'}">
                             </td>
                             <td>
-                                <span class="indicator" [ngClass]="{'green':associate.Status_Green === 'Y', 'blue':associate.Status_Blue === 'Y','red':associate.Status_Red === 'Y'}"></span>
+                                <span class="custom-tooltip indicator" [attr.title]="associate.Status_Green 
+                                ? 'Available for project allocation'
+                                : associate.Status_Blue ? 'Allocation to a project is in process'
+                                : associate.Status_Red ? 'Already allocated and tagged to a project'
+                                : ''" [ngClass]="{'green':associate.Status_Green, 'blue':associate.Status_Blue,'red':associate.Status_Red}">
+                                <!-- <span class="tooltiptext" *ngIf="associate.Status_Green">Availbale for project allocation</span>
+                                <span class="tooltiptext" *ngIf="associate.Status_Blue">Allocation to project is in process</span>
+                                <span class="tooltiptext" *ngIf="associate.Status_Red">Already allocated to a project</span> -->
+                            </span>
                             </td>
                             <td>{{associate.Name}}</td>
                             <td>{{associate.Associate_Id}}</td>
@@ -158,7 +166,7 @@
     </div>
 </div>
 <modal id="associate-view-modal">
-    <div class="modal fade show" tabindex="-1" role="dialog">
+    <div class="associateViewModel modal fade show" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -169,6 +177,13 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
+                        <div class="col col-6">
+                            <p class="viewLabel">Associate Id:</p>
+                        </div>
+                        <div class="col col-6">
+                            <p>
+                                {{ viewAssociate.Associate_Id }}</p>
+                        </div>
                         <div class="col col-6">
                             <p class="viewLabel">Associate Name:</p>
                         </div>
@@ -188,7 +203,7 @@
                         </div>
                         <div class="col col-6">
                             <p>
-                                <i class="fa" [ngClass]="{'fa-mars':viewAssociate.Gender === 'male','fa-venus':viewAssociate.Gender === 'female'}" aria-hidden="true"></i>&nbsp;{{ viewAssociate.Gender }}</p>
+                                <i class="fa" [ngClass]="{'fa-mars':viewAssociate.Gender === 'Male','fa-venus':viewAssociate.Gender === 'Female'}" aria-hidden="true"></i>&nbsp;{{ viewAssociate.Gender }}</p>
                         </div>
                         <div class="col col-6">
                             <p class="viewLabel">Associate Mobile:</p>
@@ -209,17 +224,17 @@
                             <p class="viewLabel">Associate Status:</p>
                         </div>
                         <div class="col col-6">
-                            <p *ngIf="viewAssociate.Status_Green === 'Y'">Available for project allocation.</p>
-                            <p *ngIf="viewAssociate.Status_Blue === 'Y'">Allocating to a project is in process.</p>
-                            <p *ngIf="viewAssociate.Status_Red === 'Y'">Already allocated to a project.</p>
+                            <p *ngIf="viewAssociate.Status_Green">Available for project allocation.</p>
+                            <p *ngIf="viewAssociate.Status_Blue">Allocating to a project is in process.</p>
+                            <p *ngIf="viewAssociate.Status_Red">Already allocated to a project.</p>
                         </div>
                         <div class="col col-6">
                             <p class="viewLabel">Associate Level:</p>
                         </div>
                         <div class="col col-6">
-                            <p *ngIf="viewAssociate.Level_1 === 'Y'">Fresher and less than one year experience.</p>
-                            <p *ngIf="viewAssociate.Level_2 === 'Y'">One to five years of experience.</p>
-                            <p *ngIf="viewAssociate.Level_3 === 'Y'">Six to eight years of experience.</p>
+                            <p *ngIf="viewAssociate.Level_1">Fresher and less than one year experience.</p>
+                            <p *ngIf="viewAssociate.Level_2">One to five years of experience.</p>
+                            <p *ngIf="viewAssociate.Level_3">Six to eight years of experience.</p>
                         </div>
                         <div class="col col-6">
                             <p class="viewLabel">Associate Remarks:</p>
