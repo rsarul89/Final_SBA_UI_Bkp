@@ -89,7 +89,7 @@ export class EditAssociateComponent implements OnInit, OnDestroy {
       };
       this.skillService.AddSkill(skill)
         .subscribe(data => {
-          if (data != null) {
+          if (data.Skill_Id > 0) {
             this.toastr.success('Skill added successfully', 'Success', {
               positionClass: 'toast-top-center'
             });
@@ -176,9 +176,12 @@ export class EditAssociateComponent implements OnInit, OnDestroy {
     this.associateService.UpdateAssociate(this.updateAssociate)
       .subscribe(data => {
         this.toastr.success('Associate updated successfully', 'Info', {
-          positionClass: 'toast-top-full-width'
+          positionClass: 'toast-top-center', 
+          progressBar: true,
+          progressAnimation:'increasing'
         });
         this.Reset();
+        this.router.navigateByUrl('/');
       },
       err => {
         this.toastr.error('Problem on updating associate', 'Error', {
@@ -186,8 +189,8 @@ export class EditAssociateComponent implements OnInit, OnDestroy {
         });
         this.errors = err;
         this.Reset();
+        this.router.navigateByUrl('/');
       });
-      this.router.navigateByUrl('/');
   }
   GetDefaultImage(): void {
     let imageURL = '/assets/images/img_avatar3.jpg';
@@ -203,7 +206,50 @@ export class EditAssociateComponent implements OnInit, OnDestroy {
     };
     request.send();
   }
-
+  statusRequiredCheck(): boolean {
+    if (this.updateAssociate.Status_Green == false && this.updateAssociate.Status_Blue == false && this.updateAssociate.Status_Red == false) {
+      return false;
+    }
+    else if (this.updateAssociate.Status_Green == true || this.updateAssociate.Status_Blue == true || this.updateAssociate.Status_Red == true) {
+      return true;
+    }
+  }
+  statusValidate(status: string): void {
+    if (status == 'Green') {
+      this.updateAssociate.Status_Blue = false;
+      this.updateAssociate.Status_Red = false;
+    }
+    else if (status == 'Blue') {
+      this.updateAssociate.Status_Green = false;
+      this.updateAssociate.Status_Red = false;
+    }
+    else if (status == 'Red') {
+      this.updateAssociate.Status_Green = false;
+      this.updateAssociate.Status_Blue = false;
+    }
+  }
+  levelRequiredCheck(): boolean {
+    if (this.updateAssociate.Level_1 == false && this.updateAssociate.Level_2 == false && this.updateAssociate.Level_3 == false) {
+      return false;
+    }
+    else if (this.updateAssociate.Level_1 == true || this.updateAssociate.Level_2 == true || this.updateAssociate.Level_3 == true) {
+      return true;
+    }
+  }
+  levelValidate(level: string): void {
+    if (level == 'L1') {
+      this.updateAssociate.Level_2 = false;
+      this.updateAssociate.Level_3 = false;
+    }
+    else if (level == 'L2') {
+      this.updateAssociate.Level_1 = false;
+      this.updateAssociate.Level_3 = false;
+    }
+    else if (level == 'L3') {
+      this.updateAssociate.Level_1 = false;
+      this.updateAssociate.Level_2 = false;
+    }
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

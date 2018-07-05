@@ -7,6 +7,7 @@ import {
   ApiService,
   AuthGuard,
   JwtService,
+  JsonParserService,
   UserService,
   SkillService,
   AssociateService
@@ -21,6 +22,7 @@ import {
     ApiService,
     AuthGuard,
     JwtService,
+    JsonParserService,
     UserService,
     SkillService,
     AssociateService

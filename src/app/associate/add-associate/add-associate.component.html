@@ -116,22 +116,22 @@
           <div class="col col-6 col-md-1 m-bottom-15px">
             <div class="row">
               <div class="col col-12">
-                <input type="checkbox" class="form-control status" #status="ngModel" [(ngModel)]="addAssociate.Status_Green"
+                <input type="checkbox" class="form-control status"  [(ngModel)]="addAssociate.Status_Green" (ngModelChange)="statusValidate('Green')"
                   name="statusGreen"  id="statusGreen">
                 <label class="statuslabel indicator green" for="statusGreen">Status Green</label>
               </div>
               <div class="col col-12">
-                <input type="checkbox" class="form-control status"  #status="ngModel" [(ngModel)]="addAssociate.Status_Blue"
+                <input type="checkbox" class="form-control status" [(ngModel)]="addAssociate.Status_Blue" (ngModelChange)="statusValidate('Blue')"
                   name="statusBlue"  id="statusBlue">
                 <label class="statuslabel indicator blue" for="statusBlue">Status Blue</label>
               </div>
               <div class="col col-12">
-                <input type="checkbox" class="form-control status"  #status="ngModel" [(ngModel)]="addAssociate.Status_Red" 
+                <input type="checkbox" class="form-control status"  [(ngModel)]="addAssociate.Status_Red"  (ngModelChange)="statusValidate('Red')"
                   name="statusRed"  id="statusRed">
                 <label class="statuslabel indicator red" for="statusRed">Status Red</label>
               </div>
-              <div class="col col-12" *ngIf="status.errors && (status.dirty || status.touched)">
-                  <small *ngIf="(status.errors.required && !associateForm.submitted)">
+              <div class="col col-12" *ngIf="!statusRequiredCheck() && !associateForm.submitted">
+                  <small>
                     Associate status is required.
                   </small>
                 </div>
@@ -140,22 +140,22 @@
           <div class="col col-6 col-md-1 m-bottom-15px">
             <div class="row">
               <div class="col col-12">
-                <input type="checkbox"  class="form-control level" #level="ngModel" [(ngModel)]="addAssociate.Level_1"  name="level1"
+                <input type="checkbox"  class="form-control level" [(ngModel)]="addAssociate.Level_1" (ngModelChange)="levelValidate('L1')"  name="level1"
                   id="level1">
                 <label class="levellabel indicator grey" for="level1">L1</label>
               </div>
               <div class="col col-12">
-                <input type="checkbox"  class="form-control level"  #level="ngModel"  [(ngModel)]="addAssociate.Level_2" name="level2"
+                <input type="checkbox"  class="form-control level"  [(ngModel)]="addAssociate.Level_2" (ngModelChange)="levelValidate('L2')" name="level2"
                   id="level2">
                 <label class="levellabel indicator grey" for="level2">L2</label>
               </div>
               <div class="col col-12">
-                <input type="checkbox"  class="form-control level" #level="ngModel" [(ngModel)]="addAssociate.Level_3" name="level3"
+                <input type="checkbox"  class="form-control level"  [(ngModel)]="addAssociate.Level_3" (ngModelChange)="levelValidate('L3')" name="level3"
                   id="level3">
                 <label class="levellabel indicator grey" for="level3">L3</label>
               </div>
-              <div class="col col-12" *ngIf="level.errors && (level.dirty || level.touched)">
-                <small *ngIf="(level.errors.required && !associateForm.submitted)">
+              <div class="col col-12" *ngIf="!levelRequiredCheck() && !associateForm.submitted">
+                <small>
                   Associate level is required.
                 </small>
               </div>
@@ -238,7 +238,7 @@
           <div class="actionBtns pull-right">
             <button type="button" class="btn btn-md btn-primary" (click)="Reset()"> Reset</button>
             <button type="button" class="btn btn-md btn-primary" (click)="Cancel()"> Cancel</button>
-            <button type="button" class="btn btn-md btn-primary" (click)="Save()" [disabled]="!associateForm.valid">
+            <button type="button" class="btn btn-md btn-primary" (click)="Save()" [disabled]="!associateForm.valid || !statusRequiredCheck() || !levelRequiredCheck()">
               Save</button>
           </div>
         </div>

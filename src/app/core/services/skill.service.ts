@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import { ApiService } from './api.service';
+import { JsonParserService } from './json-parser.service';
 import { Skill, Associate_Skills } from '../models';
 import { map } from 'rxjs/operators/map';
 
@@ -11,7 +12,8 @@ export class SkillService {
 
     constructor(
         private apiService: ApiService,
-        private http: HttpClient
+        private http: HttpClient,
+        private jsonParserService: JsonParserService
     ) { }
 
     GetAllSkills(): Observable<Array<Skill>> {

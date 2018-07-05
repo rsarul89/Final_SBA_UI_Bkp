@@ -126,7 +126,7 @@ export class AddAssociateComponent implements OnInit {
     }
     this.associateService.AddAssociate(this.addAssociate)
       .subscribe(data => {
-        if (data === null) {
+        if (data.Associate_Id <= 0) {
           this.toastr.info('Associate already exists', 'Info', {
             positionClass: 'toast-top-center'
           });
@@ -135,6 +135,7 @@ export class AddAssociateComponent implements OnInit {
           this.toastr.success('Associate added successfully', 'Info', {
             positionClass: 'toast-top-full-width'
           });
+          //this.router.navigateByUrl('/');
         }
         this.Reset();
       },
@@ -159,5 +160,49 @@ export class AddAssociateComponent implements OnInit {
       };
     };
     request.send();
+  }
+  statusRequiredCheck(): boolean {
+    if (this.addAssociate.Status_Green == false && this.addAssociate.Status_Blue == false && this.addAssociate.Status_Red == false) {
+      return false;
+    }
+    else if (this.addAssociate.Status_Green == true || this.addAssociate.Status_Blue == true || this.addAssociate.Status_Red == true) {
+      return true;
+    }
+  }
+  statusValidate(status: string): void {
+    if (status == 'Green') {
+      this.addAssociate.Status_Blue = false;
+      this.addAssociate.Status_Red = false;
+    }
+    else if (status == 'Blue') {
+      this.addAssociate.Status_Green = false;
+      this.addAssociate.Status_Red = false;
+    }
+    else if (status == 'Red') {
+      this.addAssociate.Status_Green = false;
+      this.addAssociate.Status_Blue = false;
+    }
+  }
+  levelRequiredCheck(): boolean {
+    if (this.addAssociate.Level_1 == false && this.addAssociate.Level_2 == false && this.addAssociate.Level_3 == false) {
+      return false;
+    }
+    else if (this.addAssociate.Level_1 == true || this.addAssociate.Level_2 == true || this.addAssociate.Level_3 == true) {
+      return true;
+    }
+  }
+  levelValidate(level: string): void {
+    if (level == 'L1') {
+      this.addAssociate.Level_2 = false;
+      this.addAssociate.Level_3 = false;
+    }
+    else if (level == 'L2') {
+      this.addAssociate.Level_1 = false;
+      this.addAssociate.Level_3 = false;
+    }
+    else if (level == 'L3') {
+      this.addAssociate.Level_1 = false;
+      this.addAssociate.Level_2 = false;
+    }
   }
 }

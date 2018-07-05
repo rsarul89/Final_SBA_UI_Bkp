@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import { ApiService } from './api.service';
-import { Associate, Associate_Skills } from '../models';
+import { JsonParserService } from './json-parser.service';
+import { Associate, Associate_Skills, DashBoardData } from '../models';
 import { map } from 'rxjs/operators/map';
 
 @Injectable()
@@ -11,8 +12,17 @@ export class AssociateService {
 
     constructor(
         private apiService: ApiService,
-        private http: HttpClient
+        private http: HttpClient,
+        private jsonParserService: JsonParserService
     ) { }
+
+    GetDashBoardData(): Observable<DashBoardData> {
+        return this.apiService
+            .get('/associate/getDashBoardData')
+            .pipe(map(data => {
+                return data as DashBoardData;
+            }));
+    }
 
     GetAllAssociates(): Observable<Array<Associate>> {
         return this.apiService

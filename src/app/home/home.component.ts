@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Errors, HomeDashBoard, Associate, Skill, Associate_Skills, AssociateService, UserService } from '../core';
+import { Errors, DashBoardData, Associate, Skill, Associate_Skills, AssociateService, UserService } from '../core';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import * as $ from 'jquery';
@@ -25,10 +25,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
   searchText = '';
   filterName = 'Name';
   errors: Errors = { errors: {} };
-  dashboardData: HomeDashBoard;
+  dashboardData: DashBoardData = new DashBoardData();
   associates: Array<Associate>;
   ass_skills: Array<Associate_Skills>;
   viewAssociate: Associate = new Associate();
+  deleteAssociate: Associate = new Associate();
+  index: number;
 
   ngAfterViewInit() {
     $('.value').each(function () {
@@ -53,18 +55,18 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   LoadPageData() {
-    this.dashboardData = {
-      registeredUsers: 25001,
-      femaleCandidates: 25,
-      maleCandidates: 70,
-      candidateFreshers: 20,
-      candidatesRated: 2508,
-      femaleCandidatesRated: 20,
-      maleCandidatesRated: 80,
-      level1candidates: 80,
-      level2candidates: 10,
-      level3candidates: 10
-    };
+    this.dashboardData = new DashBoardData();
+    this.associateService.GetDashBoardData()
+      .subscribe(data => {
+        this.dashboardData = data;
+      },
+      err => {
+        this.toastr.error('Problem on loading dashboard data', 'Error', {
+          positionClass: 'toast-top-full-width'
+        });
+        this.errors = err;
+      });
+
     this.associates = Array<Associate>();
 
     this.associateService
@@ -83,7 +85,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   Edit(associate: Associate) {
-    this.router.navigate(['/associates/edit',associate.Associate_Id]);
+    this.router.navigate(['/associates/edit', associate.Associate_Id]);
   }
   Delete(associate: Associate, idx: number) {
     this.associateService.DeleteAssociate(associate)
@@ -116,6 +118,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   closeModal(id: string) {
     this.modalService.close(id);
+  }
+  DeleteConfirm(associate: Associate, idx: number) {
+    this.deleteAssociate = associate;
+    this.index = idx;
+    this.openModal('associate-delete-confirmation-modal');
   }
   public hasData(): boolean {
     return (this.associates != null && this.associates.length > 0);

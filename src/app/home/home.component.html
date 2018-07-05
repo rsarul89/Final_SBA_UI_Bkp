@@ -135,10 +135,10 @@
                                 : associate.Status_Blue ? 'Allocation to a project is in process'
                                 : associate.Status_Red ? 'Already allocated and tagged to a project'
                                 : ''" [ngClass]="{'green':associate.Status_Green, 'blue':associate.Status_Blue,'red':associate.Status_Red}">
-                                <!-- <span class="tooltiptext" *ngIf="associate.Status_Green">Availbale for project allocation</span>
+                                    <!-- <span class="tooltiptext" *ngIf="associate.Status_Green">Availbale for project allocation</span>
                                 <span class="tooltiptext" *ngIf="associate.Status_Blue">Allocation to project is in process</span>
                                 <span class="tooltiptext" *ngIf="associate.Status_Red">Already allocated to a project</span> -->
-                            </span>
+                                </span>
                             </td>
                             <td>{{associate.Name}}</td>
                             <td>{{associate.Associate_Id}}</td>
@@ -149,11 +149,12 @@
                                 <div class="actionBtns">
                                     <button type="button" class="btn btn-sm btn-primary" (click)="Edit(associate)">
                                         <i class="fa fa-pencil-square" aria-hidden="true"></i>&nbsp;Edit</button>
-                                    <button type="button" class="btn btn-sm btn-primary" (click)="Delete(associate, i)">
+                                    <button type="button" class="btn btn-sm btn-primary" (click)="DeleteConfirm(associate, i)">
                                         <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;Delete</button>
                                     <button type="button" class="btn btn-sm btn-primary" (click)="View(associate)">
                                         <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;View</button>
                                 </div>
+
                             </td>
                         </tr>
                     </tbody>
@@ -261,10 +262,10 @@
                     <div class="row">
                         <div class="col col-12">
                             <div *ngIf="viewAssociate.Associate_Skills != null && viewAssociate.Associate_Skills.length > 0">
-                                <div class="row">
-                                    <div class="col col-6 col-md-3" *ngFor="let associateSkill of viewAssociate.Associate_Skills;let index = index;trackBy:trackByIndex;">
+                                <div class="row" >
+                                    <div class="col col-6 col-md-4" [hidden]="associateSkill.Rating <=0" *ngFor="let associateSkill of viewAssociate.Associate_Skills;let index = index;trackBy:trackByIndex;">
                                         <p>
-                                            {{ associateSkill.Skill.Skill_Name }}
+                                            {{ associateSkill.Skill.Skill_Name }} 
                                         </p>
                                     </div>
                                 </div>
@@ -278,6 +279,32 @@
                 <div class="modal-footer">
                     <div class="col col-6 text-right">
                         <button type="button" class="btn btn-md btn-secondary" (click)="closeModal('associate-view-modal');">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-background"></div>
+</modal>
+<modal id="associate-delete-confirmation-modal">
+    <div class="modal fade show" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmation</h5>
+                    <button type="button" class="close" (click)="closeModal('associate-delete-confirmation-modal');">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure want to delete this skill?.</p>
+                </div>
+                <div class="modal-footer">
+                    <div class="col col-sm-6 text-left">
+                        <button type="submit" (click)="Delete(deleteAssociate, index)" class="btn btn-md btn-primary">Ok</button>
+                    </div>
+                    <div class="col col-sm-6 text-right">
+                        <button type="button" class="btn btn-md btn-primary" (click)="closeModal('associate-delete-confirmation-modal');">Cancel</button>
                     </div>
                 </div>
             </div>

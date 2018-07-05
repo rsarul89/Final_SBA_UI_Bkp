@@ -1,13 +1,12 @@
-export interface HomeDashBoard {
-    registeredUsers?: number,
-    femaleCandidates?: number,
-    maleCandidates?: number,
-    candidateFreshers?: number,
-    candidatesRated?: number,
-    femaleCandidatesRated?: number,
-    maleCandidatesRated?: number,
-    level1candidates?:number,
-    level2candidates?:number,
-    level3candidates?:number,
-  }
-  
+export class DashBoardData {
+  registeredUsers?: Number;
+  femaleCandidates?: Number;
+  maleCandidates?: Number;
+  candidateFreshers?: Number;
+  candidatesRated?: Number;
+  femaleCandidatesRated?: Number;
+  maleCandidatesRated?: Number;
+  level1candidates?: Number;
+  level2candidates?: Number;
+  level3candidates?: Number;
+}
