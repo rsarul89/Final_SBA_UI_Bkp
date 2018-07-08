@@ -14,33 +14,22 @@
                 <div class="row">
                     <div class="col-12 col-md-12">
                         <div class="chart-box">
+                            <!-- <div class="verticalChart">
+                                <div class="singleBar" *ngFor="let chart of dashboardData.chartData; let i = index;trackBy:trackByIndex;">
+                                    <div class="bar">
+                                        <div class="value" [ngStyle]="{'height':chart.percentage+'%'}">
+                                            <span [ngStyle]="{'backgroundColor':chart.color, 'display':'inline'}">{{chart.name}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="title">{{chart.percentage}}%</div>
+                                </div>
+                            </div> -->
                             <figure>
                                 <div class="graphic">
                                     <div class="chart-row">
-                                        <div class="chart">
-                                            <span class="block" title="HTML 5">
-                                                <span class="value">18.75%</span>
-                                            </span>
-                                            <span class="block" title="CSS3">
-                                                <span class="value">12.5%</span>
-                                            </span>
-                                            <span class="block" title="Java">
-                                                <span class="value">12.5%</span>
-                                            </span>
-                                            <span class="block" title="Spring">
-                                                <span class="value">6.25%</span>
-                                            </span>
-                                            <span class="block" title="Restful">
-                                                <span class="value">12.5%</span>
-                                            </span>
-                                            <span class="block" title="Angular 1">
-                                                <span class="value">12.5%</span>
-                                            </span>
-                                            <span class="block" title="Angular 2">
-                                                <span class="value">12.5%</span>
-                                            </span>
-                                            <span class="block" title="React">
-                                                <span class="value">12.5%</span>
+                                        <div class="chart" >
+                                            <span *ngFor="let chart of dashboardData.chartData; let i = index;trackBy:trackByIndex;" class="block" [ngStyle]="{'backgroundColor':chart.color}" [attr.title]="chart.name">
+                                                <span class="value vertical-text">{{chart.percentage}}</span>
                                             </span>
                                         </div>
                                     </div>
@@ -262,10 +251,10 @@
                     <div class="row">
                         <div class="col col-12">
                             <div *ngIf="viewAssociate.Associate_Skills != null && viewAssociate.Associate_Skills.length > 0">
-                                <div class="row" >
+                                <div class="row">
                                     <div class="col col-6 col-md-4" [hidden]="associateSkill.Rating <=0" *ngFor="let associateSkill of viewAssociate.Associate_Skills;let index = index;trackBy:trackByIndex;">
                                         <p>
-                                            {{ associateSkill.Skill.Skill_Name }} 
+                                            {{ associateSkill.Skill.Skill_Name }}
                                         </p>
                                     </div>
                                 </div>

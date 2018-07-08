@@ -9,4 +9,14 @@ export class DashBoardData {
   level1candidates?: Number;
   level2candidates?: Number;
   level3candidates?: Number;
+  chartData?: Array<ChartData>;
+  constructor() {
+    this.chartData = new Array<ChartData>();
+  }
+}
+
+export class ChartData {
+  name?: String;
+  color?: String;
+  percentage?: Number;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Errors, DashBoardData, Associate, Skill, Associate_Skills, AssociateService, UserService } from '../core';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
@@ -12,7 +12,7 @@ import { ModalService } from '../shared';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit, AfterContentChecked  {
 
   constructor(private router: Router
     , private associateService: AssociateService
@@ -32,12 +32,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
   deleteAssociate: Associate = new Associate();
   index: number;
 
-  ngAfterViewInit() {
+  ngAfterContentChecked() {
     $('.value').each(function () {
       var text = $(this).text();
       var title = $(this).closest('.block').attr('title');
       $(this).text(title);
-      $(this).parent().css('width', text);
+      $(this).parent().css('width',(parseInt(text)*1.5) + "%");
     });
   }
 

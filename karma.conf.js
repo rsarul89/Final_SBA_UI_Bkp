@@ -12,11 +12,17 @@ module.exports = function (config) {
       require('karma-coverage-istanbul-reporter'),
       require('@angular/cli/plugins/karma')
     ],
-    client:{
+    files: ["../UI/node_modules/bootstrap/dist/css/bootstrap.min.css",
+      "styles.css",
+      "../UI/node_modules/ngx-toastr/toastr.css",
+      "../UI/node_modules/font-awesome/css/font-awesome.css",
+      "../UI/node_modules/jquery/dist/jquery.min.js",
+      "../UI/node_modules/bootstrap/dist/js/bootstrap.min.js"],
+    client: {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     coverageIstanbulReporter: {
-      reports: [ 'html', 'lcovonly' ],
+      reports: ['html', 'lcovonly'],
       fixWebpackSourcePaths: true
     },
     angularCli: {

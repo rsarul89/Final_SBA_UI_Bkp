@@ -1,0 +1,5 @@
+[0707/191559.249:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0707/191559.251:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0707/191559.251:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0707/191559.251:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0707/191559.254:ERROR:exception_snapshot_win.cc(88)] thread ID 10360 not found in process
