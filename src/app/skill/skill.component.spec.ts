@@ -111,17 +111,6 @@ describe('SkillComponent', () => {
 
     it('it should update skill', async(inject([SkillService], (skillService: SkillService) => {
         const element = fixture.nativeElement;
-        // let val = element.querySelectorAll('#skillEditName').value;
-        // fixture.detectChanges();
-        // expect(val).toBeNull();
-        // let el1 = fixture.debugElement.queryAll(By.css('.btn-danger'))[0].nativeElement.click();
-        // fixture.detectChanges();
-        // let editVal = element.querySelectorAll('#skillEditName').value;
-        // expect(editVal).toEqual('TestSkill4');
-        // fixture.detectChanges();
-        // let updatedVal = element.querySelectorAll('#skillEditName').value = 'TestSkill4Updated';
-        // fixture.detectChanges();
-        // expect(updatedVal).toEqual('TestSkill4Updated');
         let updatedSkill: Skill = {
             Skill_Id: 4,
             Skill_Name: 'TestSkill4Updated',

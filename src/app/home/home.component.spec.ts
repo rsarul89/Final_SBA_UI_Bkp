@@ -38,7 +38,7 @@ describe('HomeComponent', () => {
 
     it('should get load', () => {
         component.ngOnInit();
-        component.ngAfterViewInit();
+        component.ngAfterContentChecked();
     });
 
     // it('should login first', inject([UserService], (userService: UserService) => {
@@ -77,7 +77,7 @@ describe('HomeComponent', () => {
 
     it('should get load associates table', () => {
         component.ngOnInit();
-        component.ngAfterViewInit();
+        component.ngAfterContentChecked();
         const element = fixture.nativeElement;
         fixture.detectChanges();
         let targetTRs = element.querySelectorAll('.associates-table > tr');
